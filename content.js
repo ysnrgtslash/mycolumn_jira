@@ -1,9 +1,5 @@
 
-
-
-
 function updateMyColumn() {
-  // フィルター一覧の各行（クラスが "issuerow" の <tr> 要素）を選択
 
   var addClumnFlag = 1;
   var filterRows = document.querySelectorAll('tr.issuerow');
@@ -12,12 +8,12 @@ function updateMyColumn() {
   }
 
 
-  // 各行に対してループ
+  // loop for each line 
   filterRows.forEach(function(row) {
   var memoElement;
   var keyId =row.getAttribute('data-issuekey'); 
     if ( addClumnFlag) {
-    // 新しい要素を作成
+    // creat new element
     memoElement = document.createElement('td');
     memoElement.setAttribute('class', 'mycolumn');
     memoElement.setAttribute('mycolumn-key', keyId);
@@ -25,22 +21,20 @@ function updateMyColumn() {
     memoElement = row.lastChild;
     }
     
-    // メモの内容を設定
+    // get memo from storage
     chrome.storage.local.get([keyId], function (value) {
-      console.log(value);
+      // console.log(value);
       if(value[keyId]) {
 
       memoElement.textContent  = value[keyId];
       } else {
-        memoElement.textContent =" empty";
+        memoElement.textContent =" ---- ";
       }
 
     });
 
-
-    // console.log(row.getAttribute('data-issuekey'));
     
-    // 新しい要素を既存のDOM要素に追加
+    // add new element to DOM
     if(addClumnFlag) 
       row.appendChild(memoElement);
     });
@@ -51,7 +45,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.action == 'update') {
     updateMyColumn();
   }
- // addMemoColumn(request.memo)    
+
 });
 
 

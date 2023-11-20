@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   updateButton.addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {action:'update',  memo:'msg from pop'}, function(response){
+      chrome.tabs.sendMessage(tabs[0].id, {action:'update',  memo:'msg from pop'}, function(){
     //      alert(response)
       //    $("#text").text(response);
       });
