@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Jira Memo",
+    "name": "My Column for Jira",
     "version": "1.0",
     "description": "Add memo column to Jira filter list",
     "permissions": ["storage", "activeTab"],

@@ -1,4 +1,15 @@
 
+function getKeys() {
+  var keys = new Array();
+  var filterRows = document.querySelectorAll('tr.issuerow');
+  filterRows.forEach(function(row) {
+      keys.push(row.getAttribute('data-issuekey'));
+  });
+  
+  return keys;
+}
+
+
 function updateMyColumn() {
 
   var addClumnFlag = 1;
@@ -44,8 +55,12 @@ function updateMyColumn() {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.action == 'update') {
     updateMyColumn();
+    sendResponse({data:'update done'})
+  } else if (request.action == 'getKeys') {
+    var response = { keys: getKeys() };
+    console.log(response);
+    sendResponse(response);
   }
-
 });
 
 
